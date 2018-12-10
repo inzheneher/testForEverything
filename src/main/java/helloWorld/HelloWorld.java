@@ -5,6 +5,6 @@ public class HelloWorld {
 		if (args.length > 0) {
 			System.out.println("Hello, " + args[0]);				
 		}
-		else System.out.println("Hi, default user!");				
+		else System.out.println("Hi, " + System.getProperty("user.name") + "!");
 	}
 }

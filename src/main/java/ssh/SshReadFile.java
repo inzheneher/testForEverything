@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 public class SshReadFile {
 
+    private static final String LOCALE_PATH = "/home/inzheneher/Documents/";
+
     private static String user;
     private static String pass;
     private static String host;
@@ -44,7 +46,7 @@ public class SshReadFile {
             session.connect(10000);
             ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
             sftp.connect();
-            List list = sftp.ls("/home/inzheneher/Documents/");
+            List list = sftp.ls(LOCALE_PATH);
 
             for (Object o : list) {
                 System.out.println(o.toString());
