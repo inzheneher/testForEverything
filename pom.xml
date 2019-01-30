@@ -40,6 +40,7 @@
         <hibernate.version>5.3.7.Final</hibernate.version>
         <spring.version>5.1.2.RELEASE</spring.version>
         <ignite.version>2.7.0</ignite.version>
+        <junit.version>5.4.0-M1</junit.version>
     </properties>
 
     <dependencies>
@@ -47,9 +48,9 @@
         <!--JUNIT-->
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 

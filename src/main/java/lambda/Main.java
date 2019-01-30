@@ -1,34 +1,36 @@
 package lambda;
 
-import org.apache.ignite.Ignite;
-import org.apache.ignite.Ignition;
-import org.apache.ignite.lang.IgniteCallable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-
 public class Main {
+    static int a = 10;
+    static int b = 90;
+
     public static void main(String[] args) {
+        int c = 220;
+        Mathematical<Integer> operationSum = (x, y) -> x + y;
+        Mathematical<String> operationConcatination = (s1, s2) -> s1 + " " + s2;
+        Printable print = System.out::println;
+        Mathematical<Person> abraCodabra =
+                (j, h) ->
+                        new Person(
+                                j.getAge() + h.getAge(), j.getHeight() + h.getHeight()
+                        );
+        Mathematical<Integer> variables = (x, y) -> {
+            a = 100;
+            return a + c;
+        };
+        Mathematical<Double> divideByZero = (x, y) -> {
+            if (y == 0) return 0d;
+            return x / y;
+        };
 
-        try (Ignite ignite = Ignition.start("example-ignite.xml")) {
-
-            Collection<String> list = Arrays.asList("Ivan", "Bober", "Tucha");
-            Collection<IgniteCallable<Integer>> stringList = new ArrayList<>();
-
-            for (final String word:
-                 list) {
-                stringList.add(word::length);
-            }
-
-            Collection<Integer> result = ignite.compute().call(stringList);
-
-            int sum = result.stream().mapToInt(Integer::intValue).sum();
-
-            System.out.println(sum);
-
-        }
-
-
+        System.out.println(operationSum.compute(45, 18));
+        System.out.println(operationConcatination.compute("Hello", "World"));
+        print.print("Hi there, mthfckr");
+        System.out.println(abraCodabra.compute(new Person(18, 180), new Person(36, 185)));
+        System.out.println(a);
+        System.out.println(variables.compute(a, b));
+        System.out.println(a);
+        System.out.println(divideByZero.compute(19d, 0d));
+        System.out.println(divideByZero.compute(19d, 13d));
     }
 }
