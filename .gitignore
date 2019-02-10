@@ -4,3 +4,4 @@ bin_test
 target
 *.iml
 src/main/resources/host.properties
+src/main/resources/user.ser

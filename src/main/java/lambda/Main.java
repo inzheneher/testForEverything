@@ -1,5 +1,12 @@
 package lambda;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.math.BigDecimal;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+
 public class Main {
     static int a = 10;
     static int b = 90;
@@ -23,6 +30,15 @@ public class Main {
             return x / y;
         };
 
+        Person person = new Person(25, 170);
+        Personable personable = person::getHeight;
+
+        BinaryOperator<Double> binaryOperator = Math::pow;
+
+        UnaryOperator<String> stringConverter = s -> s + " " + s;
+
+        Function<Integer, String> function = i -> i + "UU!";
+
         System.out.println(operationSum.compute(45, 18));
         System.out.println(operationConcatination.compute("Hello", "World"));
         print.print("Hi there, mthfckr");
@@ -32,5 +48,14 @@ public class Main {
         System.out.println(a);
         System.out.println(divideByZero.compute(19d, 0d));
         System.out.println(divideByZero.compute(19d, 13d));
+        System.out.println(personSurgeon(person::getAge));
+        System.out.println(personSurgeon(personable));
+        System.out.println(new BigDecimal(binaryOperator.apply(100d, 100d)).toPlainString());
+        System.out.println(stringConverter.apply("Hello"));
+        System.out.println(function.apply(8));
+    }
+
+    private static int personSurgeon(@NotNull Personable person) {
+        return person.personAge();
     }
 }
